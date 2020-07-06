@@ -1,0 +1,39 @@
+﻿@model ForumMessenger.Models.Chat
+
+@{
+    ViewBag.Title = "ListMessages";
+}
+
+<h2>Чат @Html.DisplayFor(model => model.UserSrc.Login) - @Html.DisplayFor(model => model.UserDst.Login)</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Сообщение
+        </th>
+        <th>
+            Дата и время
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Messages)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>                
+                @Html.ActionLink("Удалить", "DeleteMessage", new { id = item.Id }, new {onclick="return confirm('Вы уверены, что хотите удалить сообщение?')", @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    @Html.ActionLink("Вернуться", "ListChats")
+</div>
+
+
