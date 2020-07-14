@@ -1,15 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = ForumMessenger.Resources.Resource.Homepage;
 }
 
 <div class="row">
     <div class="col-md-4">        
-        <h4>Сайт для обмена сообщениями между пользователями</h4>
+        <h4>@ForumMessenger.Resources.Resource.Forum_Messenger</h4>
         <br />
         <div>
-            @Html.ActionLink("Регистрация", "Register", "Account")
+            @Html.ActionLink(ForumMessenger.Resources.Resource.Register, "Register", "Account")
             <br>
-            @Html.ActionLink("Авторизация", "Login", "Account")
+            @Html.ActionLink(ForumMessenger.Resources.Resource.Sign_In, "Login", "Account")
         </div>
     </div>
 </div>

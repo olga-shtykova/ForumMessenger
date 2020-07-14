@@ -1,37 +1,44 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ForumMessenger.Resources;
+using System.ComponentModel.DataAnnotations;
 
 namespace ForumMessenger.Models
 {
     public class RegisterModel
     {
-        [Required(ErrorMessage = "Имя обязателено")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Имя должно быть 3 - 50 символов.")]
-        [RegularExpression(@"^([A-ZА-Яa-zа-я]+)$", ErrorMessage = "Только прописные и строчные буквы.")]
+        [Display(Name = "Name", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "NameRequired")]        
+        [StringLength(50, MinimumLength = 3, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "NameLengthInvalid")]
+        [RegularExpression(@"^([A-ZА-Яa-zа-я]+)$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "NameInvalid")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Фамилия обязателена")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Фамилия должна быть 3 - 50 символов.")]
-        [RegularExpression(@"^([A-ZА-Яa-zа-я]+)$", ErrorMessage = "Только прописные и строчные буквы.")]
+        [Display(Name = "Surname", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "SurnameRequired")]        
+        [StringLength(50, MinimumLength = 3, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "SurnameLengthInvalid")]
+        [RegularExpression(@"^([A-ZА-Яa-zа-я]+)$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "SurnameInvalid")]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Логин обязателен")]        
-        [RegularExpression(@"^([a-z0-9]){4,8}", ErrorMessage = "Логин должен быть 4-8 символов a-z и/или 0-9")]
+        [Display(Name = "Login", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "LoginRequired")]        
+        [RegularExpression(@"^([a-z0-9]){4,8}", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "LoginInvalid")]
         public string Login { get; set; }
 
-        [Required(ErrorMessage = "Адрес обязателен")]
-        [RegularExpression(@"\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b", ErrorMessage = "Некорректный адрес")]        
+        [Display(Name = "Email", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "EmailRequired")]        
+        [RegularExpression(@"\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "EmailInvalid")]
         public string Email { get; set; }
 
         public string Role { get; set; }
 
-        [Required(ErrorMessage = "Пароль обязателен")]
-        [StringLength(18, ErrorMessage = "Пароль должен быть минимум {2} символов длинной.", MinimumLength = 5)]
+        [Display(Name = "Password", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordRequired")]        
+        [StringLength(18, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordLengthInvalid", MinimumLength = 5)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Пароль обязателен")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordRequired")]        
+        [Compare("Password", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordMustMatch")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
     }
 }

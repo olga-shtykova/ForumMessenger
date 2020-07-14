@@ -8,7 +8,7 @@ using ForumMessenger.Security;
 
 namespace ForumMessenger.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : LangController
     {
         private readonly MessageExchangeContext _db = new MessageExchangeContext();
 
@@ -43,7 +43,8 @@ namespace ForumMessenger.Controllers
                     return RedirectToAction("ListChats", "Home");
                 }
 
-                ModelState.AddModelError("", "Неправильный логин или пароль!");
+                string message = Resources.Resource.IncorrectLoginOrPassword;
+                ModelState.AddModelError("", message);
             }
             return View(model);
         }
@@ -96,9 +97,10 @@ namespace ForumMessenger.Controllers
                         FormsAuthentication.SetAuthCookie(model.Login, true);
                         return RedirectToAction("ListChats", "Home");
                     }
-                }               
+                }
 
-                ModelState.AddModelError("", "Логин занят!");
+                string message = Resources.Resource.LoginIsUsed;
+                ModelState.AddModelError("", message);
             }
             return View(model);
         }
@@ -135,13 +137,13 @@ namespace ForumMessenger.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult EditUser(string actionType, User u)
         {
-            if (actionType == "Сохранить")
+            if (actionType == Resources.Resource.Save)
             {
                 // сохраняем изменения в базе данных
                 _db.Entry(u).State = EntityState.Modified;
                 _db.SaveChanges();
             }
-            else if(actionType == "Отмена")
+            else if(actionType == Resources.Resource.Cancel)
             {
                 // от измененяемния в базе данных    
                 _db.Entry(u).State = EntityState.Unchanged;              
@@ -150,10 +152,12 @@ namespace ForumMessenger.Controllers
         }                  
 
         [Authorize(Roles = "admin")]
+        //[HttpDelete]
         public ActionResult DeleteUser(int id)
         {
             // создаем пользователя по заданному id 
             var u = new User { Id = id };
+
             // удаляем его и сохраняем изменения
             _db.Entry(u).State = EntityState.Deleted;
             _db.SaveChanges();

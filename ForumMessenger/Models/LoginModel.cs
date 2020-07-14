@@ -1,13 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ForumMessenger.Resources;
+using System.ComponentModel.DataAnnotations;
 
 namespace ForumMessenger.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage ="Логин обязателен")]
+        [Display(Name = "Login", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "LoginRequired")]
         public string Login { get; set; }
 
-        [Required(ErrorMessage = "Пароль обязателен")]
+        [Display(Name = "Password", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordRequired")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

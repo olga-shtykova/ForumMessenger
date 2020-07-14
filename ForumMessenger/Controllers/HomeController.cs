@@ -7,10 +7,16 @@ using System.Web.Mvc;
 
 namespace ForumMessenger.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : LangController
     {
         private readonly MessageExchangeContext _db = new MessageExchangeContext();
         
+        public ActionResult ChangeLanguage(string lang)
+        {
+            new LangManager().SetLanguage(lang);
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -75,8 +81,9 @@ namespace ForumMessenger.Controllers
                 var m = new Message { Content = model.Content, Date = model.Date, Chat = c };               
                 _db.Messages.Add(m);
                 _db.SaveChanges();
-                
-                ModelState.AddModelError("", "Сообщение отправлено!");               
+
+                string message = Resources.Resource.MessageSent;
+                ModelState.AddModelError("", message);               
             }            
             return View(model);
         }

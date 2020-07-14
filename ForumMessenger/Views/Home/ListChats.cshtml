@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<ForumMessenger.Models.Chat>
 
 @{
-    ViewBag.Title = "ListChats";
+    ViewBag.Title = ForumMessenger.Resources.Resource.Chat_List;
 }
 
-<h2>Ваш логин: <b>@Context.User.Identity.Name</b></h2>
+<h2>@ForumMessenger.Resources.Resource.Your_login: <b>@Context.User.Identity.Name</b></h2>
 <br />
-<h4>Список чатов</h4>
+<h4>@ForumMessenger.Resources.Resource.Chat_List</h4>
 <table class="table table-striped">
     <tr>
         <th>
-            От кого
+            @ForumMessenger.Resources.Resource.From
         </th>
         <th>
-            Кому
+            @ForumMessenger.Resources.Resource.To
         </th>
         <th></th>
     </tr>
@@ -28,8 +28,8 @@
                 @Html.DisplayFor(modelItem => item.UserDst.Login)
             </td>
             <td>
-                @Html.ActionLink("Просмотр", "ListMessages", new { id = item.Id }, new { @class = "btn btn-default" }) |
-                @Html.ActionLink("Удалить", "DeleteChat", new { id = item.Id }, new {onclick="return confirm('Вы уверены, что хотите удалить чат?')", @class = "btn btn-danger" })
+                @Html.ActionLink(ForumMessenger.Resources.Resource.Read, "ListMessages", new { id = item.Id }, new { @class = "btn btn-default" }) |
+                @Html.ActionLink(ForumMessenger.Resources.Resource.Delete, "DeleteChat", new { id = item.Id }, new {@onclick= "return confirm('Confirm delete! Подтвердите удаление!')", @class = "btn btn-danger" })
             </td>
         </tr>
     }

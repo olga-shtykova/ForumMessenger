@@ -1,59 +1,61 @@
 ﻿@model IEnumerable<ForumMessenger.Models.User>
 
 @{
-    ViewBag.Title = "ListUsers";
+    ViewBag.Title = ForumMessenger.Resources.Resource.ListUsers;
 }
 
-    <h2>Управление пользователями</h2>
+<h2>@ForumMessenger.Resources.Resource.ListUsers</h2>
 
 <table class="table table-striped">
     <tr>
         <th>
-            Имя
+            @ForumMessenger.Resources.Resource.Name
         </th>
         <th>
-            Фамилия
+            @ForumMessenger.Resources.Resource.Surname
         </th>
         <th>
-            Логин
+            @ForumMessenger.Resources.Resource.Login
         </th>
         <th>
-            Пароль
+            @ForumMessenger.Resources.Resource.Password
         </th>
         <th>
-            Электронная почта
+            @ForumMessenger.Resources.Resource.Email
         </th>
         <th>
-            Роль
+            @ForumMessenger.Resources.Resource.Role
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.ActionLink("Изменить", "EditUser", new { id=item.Id }, new {@class= "btn btn-default" }) |           
-            @Html.ActionLink("Удалить", "DeleteUser", new { id=item.Id }, new {onclick="return confirm('Вы уверены, что хотите удалить пользователя?')", @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+           
+            <td>
+                @Html.ActionLink(ForumMessenger.Resources.Resource.Edit, "EditUser", new { id = item.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink(ForumMessenger.Resources.Resource.Delete, "DeleteUser", new { id = item.Id }, new { onclick = "return confirm('Confirm delete! Подтвердите удаление!')", @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 </table>
+
