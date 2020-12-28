@@ -11,12 +11,14 @@ namespace ForumMessenger.Models
 
         //[ForeignKey("UserSrc")]
         public int? UserIdSrc { get; set; }
+
         // Ссылка на пользователя отправителя  
         [ForeignKey("UserIdSrc")]
         public User UserSrc { get; set; }
 
         //[ForeignKey("UserDst")]
         public int? UserIdDst { get; set; }
+
         // Ссылка на пользователя адресата  
         [ForeignKey("UserIdDst")]
         public User UserDst { get; set; }

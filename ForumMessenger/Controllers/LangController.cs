@@ -13,7 +13,7 @@ namespace ForumMessenger.Controllers
         {
             string lang = null;
 
-            // Get the client's cookies
+            // Получаем куки пользователя
             // Сохраняем выбранную культуру в куки
             HttpCookie langCookie = Request.Cookies["culture"];
 
@@ -24,7 +24,7 @@ namespace ForumMessenger.Controllers
             }
             else
             {
-                // Get a sorted array of client language preferences
+                // Получает отсортированный массив языковых предпочтений пользователя
                 var userLanguage = Request.UserLanguages;
 
                 var userlang = userLanguage != null ? userLanguage[0] : "";
